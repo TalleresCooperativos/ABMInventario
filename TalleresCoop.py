@@ -74,6 +74,8 @@ def delete_item(id):
     flash('item Removed Successfully')
     return redirect(url_for('Index'))
 
+#nueva modificacion
+
 '''
 # starting the app
 if __name__ == "__main__":
