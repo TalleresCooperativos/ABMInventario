@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<button class="btn btn-primary hidden-print" onclick="window.print();"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+  <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"></path>
+  <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"></path>
+</svg>Imprimir</button>
+
+  <div class="row">
+    <div class="col-md-5">
+      {% with messages = get_flashed_messages()  %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <div class="card card-body">
+        <form action="{{url_for('add_item')}}" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" name="codigo" placeholder="codigo">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="cantidad" placeholder="cantidad">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="nombre" placeholder="nombre">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="valor" placeholder="valor">
+          </div>
+          <button class="btn btn-primary btn-block">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-md-7" >
+
+
+    <button class="btn btn-primary hidden-print" onclick="javascript:imprim2();"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+  <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"></path>
+  <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"></path>
+</svg>Imprimir</button>
+            <div id="muestra">
+      <table class="table table-striped table-hover table-bordered table-sm bg-white" style= "text-align: left"; "padding: 8px;"; "border-collapse: collapse";
+  "width: 100%";"background-color: #dddddd";>
+        <thead>
+          <tr>
+            <td>codigo</td>
+            <td>cantidad</td>
+            <td>nombre</td>
+            <td>valor</td>
+            <td>Operations</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{item.0}}</td>
+            <td>{{item.2}}</td>
+            <td>{{item.1}}</td>
+            <td>{{item.3}}</td>
+            <td>
+              <a href="/edit/{{item.0}}" class="btn btn-secondary">editar</a>
+              <a href="/delete/{{item.0}}" class="btn btn-danger btn-delete">borrar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
